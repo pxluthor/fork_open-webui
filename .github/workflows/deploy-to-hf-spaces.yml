@@ -15,7 +15,7 @@ jobs:
     steps:
       - id: check-key
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
         if: "${{ env.HF_TOKEN != '' }}"
         run: echo "defined=true" >> $GITHUB_OUTPUT
 
@@ -24,7 +24,7 @@ jobs:
     needs: [check-secret]
     if: needs.check-secret.outputs.token-set == 'true'
     env:
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
